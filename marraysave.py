@@ -58,14 +58,17 @@ def msgbox(msgs:str,color:str):
         for x in range(Width):
             # obtém o valor RGB do pixel atual
             r, g, b = image.getpixel((x, y))
-            rgb:str=chr(r)+chr(g)+chr(b)+chr(0)
-            f1.write(rgb)
+            f1.write(chr(r))
+            f1.write(chr(g))
+            f1.write(chr(b))
+            f1.write(chr(0))
             
 
     
     
     canvas.pack()
     f1.close()
+    print("saved")
     
 class BareboneBuilder:
     def __init__(self, root):
