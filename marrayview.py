@@ -15,36 +15,8 @@ images=None
 ccanvas=None
 
 def encodess(s:str)->str:
-    sss=""
-    s1=ord("0")
-    s2=ord("9")
-    s3=ord("a")
-    s4=ord("f")
-    s5=ord("A")
-    s6=ord("F")
-    for n in range(len(s)):
-        b=ord(s[n])
-        
-        if b>=s1 or b<=s2:
-            sss=sss+s[n]
-
-            
-        else:
-            if b>=s3 or b<=s4:
-                sss=sss+s[n]
-            else: 
-            
-            
-                if b>s6 or b<s5:
-                    sss=sss+s[n]
-
-                else: 
-                    
-                    st=hex(b).replace("x","")
-                    st=st.replace("\\","")
-            
-                    sss=sss+st
-
+    
+    sss=list(s)
     
     return sss
 def msgbox(msgs:str,color:str):
@@ -53,46 +25,43 @@ def msgbox(msgs:str,color:str):
     
     filename = tk.filedialog.askopenfilename(title="load file")
     
-    f1 = open(filename,"br+")
+    f1 = open(filename,"rb")
     sss1:str=str(f1.read(9))
-
-    sss1:str=sss1[:]
+    
+   
     sss1=sss1.replace("b'","")
-    sss1=sss1.replace("\\x00'","\0")
+    sss1=sss1.replace("'","")
+    sss1=sss1.replace("\\x00","\0")
     print(sss1)
     if sss1!="MapArray\0":
         f1.close()
         print("return title")
         return None
     # obtém as dimensões da imagem
-    Width:str= str(f1.read(4))
-    Width=Width.replace("\\x","")
-    Width=Width.replace("b'","")
-    Width=Width.replace("'","")
-
-    Width:str=encodess(Width)
-
-    Width:int=int(Width[0:2],16)+int(Width[2:4],16)*256+int(Width[4:6],16)*256*256+int(Width[6:8],16)*256*256*256
+    
+    Width=f1.read(4)
+    r0=Width[0]
+    r1=Width[1]
+    r2=Width[2]
+    r3=Width[3]
+    Width:int=r0+r1*256+r2*256*256+r3*256*256*256
     print("*"+str(Width))
 
-    Height:str= str(f1.read(4))
-    Height=Height.replace("\\x","")
-    Height=Height.replace("b'","")
-    Height=Height.replace("'","")
-    Height:str=encodess(Height)
-    Height:int=int(Height[0:2],16)+int(Height[2:4],16)*256+int(Height[4:6],16)*256*256+int(Height[6:8],16)*256*256*256
+    Height=f1.read(4)
+    r0=Height[0]
+    r1=Height[1]
+    r2=Height[2]
+    r3=Height[3]
+    Height:int=r0+r1*256+r2*256*256+r3*256*256*256
     print("*"+str(Height))
-    m32:str=str(f1.read(4))
-    m32=m32.replace("\\x","")
-    m32=m32.replace("b'","")
-    m32=m32.replace("'","")
-    m32:str=encodess(m32)
+    m32=f1.read(4)
 
-    print(m32)
-    m32:int=int(m32[0:2],16)+int(m32[2:4],16)*256+int(m32[4:6],16)*256*256+int(m32[6:8],16)*256*256*256
-
-
-  
+    r0=m32[0]
+    r1=m32[1]
+    r2=m32[2]
+    r3=m32[3]
+    m32:int=r0+r1*256+r2*256*256+r3*256*256*256
+    print("*"+str(m32))
     if m32!=32 and m32!=0:
         f1.close()
         print(m32)
