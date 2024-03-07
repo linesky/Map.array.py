@@ -9,7 +9,7 @@ import os
 from PIL import Image 
 from PIL import ImageTk
 import PIL
-
+import array
 
 images=None
 ccanvas=None
@@ -51,21 +51,31 @@ def msgbox(msgs:str,color:str):
     f1.write(chr(rt4))
     f1.write(chr(rt4))
 
-
+    f1.close()
+    f1 = open(filename+".array","ba")
     # percorre todos os pixels da imagem e muda a cor azul para vermelho
     canvas = tk.Canvas(Window, width=Width, height=Height, bg=color)
+    ssd=""
     for y in range(Height):
         for x in range(Width):
             # obtém o valor RGB do pixel atual
             r, g, b = image.getpixel((x, y))
-            f1.write(chr(r))
-            f1.write(chr(g))
-            f1.write(chr(b))
-            f1.write(chr(0))
-            
+            ssd=ssd+(chr(b & 127 ))
+            ssd=ssd+(chr(g & 127))
+            ssd=ssd+(chr(r & 127))
+            ssd=ssd+(chr(0))
+            s=hex(b+g*256+r*256*256)
+            s=s.replace("0x","000000")
+            s1=len(s)
+            s2=s1-6
+            s="#"+s[s2:s1]
+            #print(s)
+            canvas.create_rectangle((x, y),(x+1,y+1),outline="", fill=s)
+               
 
     
-    
+    b111=bytes(ssd,"ascii")
+    f1.write(b111)
     canvas.pack()
     f1.close()
     print("saved")
