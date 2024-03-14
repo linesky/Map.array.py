@@ -72,7 +72,7 @@ def msgbox(msgs:str,color:str):
     m32:int=r0+r1*256+r2*256*256+r3*256*256*256
     print("*"+str(m32))
     
-    if m32!=16:
+    if m32!=8:
         f1.close()
         print(m32)
         print("return"+str(m32))

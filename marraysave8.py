@@ -53,7 +53,7 @@ def msgbox(msgs:str,color:str):
     f1.write(chr(rt3))
     f1.write(chr(rt2))
     f1.write(chr(rt1))
-    rt3=16
+    rt3=8
     rt4=0
     f1.write(chr(rt3))
     f1.write(chr(rt4))
