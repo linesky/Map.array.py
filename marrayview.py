@@ -62,6 +62,7 @@ def msgbox(msgs:str,color:str):
     r3=m32[3]
     m32:int=r0+r1*256+r2*256*256+r3*256*256*256
     print("*"+str(m32))
+    
     if m32!=32 and m32!=0:
         f1.close()
         print(m32)
@@ -73,9 +74,9 @@ def msgbox(msgs:str,color:str):
         for x in range(Width):
             # obtém o valor RGB do pixel atual
             rgb= f1.read(4)
-            r=rgb[0]
-            g=rgb[1]
-            b=rgb[2]
+            r=(rgb[0]<<1)
+            g=(rgb[1]<<1)
+            b=(rgb[2]<<1)
             
             # verifica se o pixel é azul (R=0, G=0, B=255) e o substitui por vermelho (R=255, G=0, B=0)
             #if r == 0 and g == 0 and b == 255:

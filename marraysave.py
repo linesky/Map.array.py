@@ -60,9 +60,9 @@ def msgbox(msgs:str,color:str):
         for x in range(Width):
             # obtém o valor RGB do pixel atual
             r, g, b = image.getpixel((x, y))
-            ssd=ssd+(chr(b & 127 ))
-            ssd=ssd+(chr(g & 127))
-            ssd=ssd+(chr(r & 127))
+            ssd=ssd+(chr((b>>1) & 127 ))
+            ssd=ssd+(chr((g>>1) & 127))
+            ssd=ssd+(chr((r>>1) & 127))
             ssd=ssd+(chr(0))
             s=hex(b+g*256+r*256*256)
             s=s.replace("0x","000000")
@@ -74,7 +74,8 @@ def msgbox(msgs:str,color:str):
                
 
     
-    b111=bytes(ssd,"ascii")
+    b111=bytes(ssd.encode("ascii"))
+   
     f1.write(b111)
     canvas.pack()
     f1.close()
