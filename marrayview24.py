@@ -74,9 +74,9 @@ def msgbox(msgs:str,color:str):
         for x in range(Width):
             # obtém o valor RGB do pixel atual
             rgb= f1.read(3)
-            r=rgb[0]
-            g=rgb[1]
-            b=rgb[2]
+            r=(rgb[0]<<1)
+            g=(rgb[1]<<1)
+            b=(rgb[2]<<1)
             
             # verifica se o pixel é azul (R=0, G=0, B=255) e o substitui por vermelho (R=255, G=0, B=0)
             #if r == 0 and g == 0 and b == 255:

@@ -13,6 +13,14 @@ import array
 
 images=None
 ccanvas=None
+def convert_rgb_to_16bit(red, green, blue):
+    # Mapeia os valores de red, green e blue para os bits relevantes
+    high_byte = ((red & 0b1111) << 4) | (green >> 2)
+    low_byte = (green << 4) | (blue >> 4)
+    
+    # Retorna os bytes high e low como uma tupla
+    return (high_byte, low_byte)
+
 def msgbox(msgs:str,color:str):
     Window = tk.Toplevel(bg=color)
 
@@ -60,9 +68,9 @@ def msgbox(msgs:str,color:str):
         for x in range(Width):
             # obtém o valor RGB do pixel atual
             r, g, b = image.getpixel((x, y))
-            ssd=ssd+(chr(b & 127 ))
-            ssd=ssd+(chr(g & 127))
-            ssd=ssd+(chr(r & 127))
+            ssd=ssd+(chr((b>>1) & 127 ))
+            ssd=ssd+(chr((g>>1) & 127))
+            ssd=ssd+(chr((r>>1) & 127))
             
             s=hex(b+g*256+r*256*256)
             s=s.replace("0x","000000")
