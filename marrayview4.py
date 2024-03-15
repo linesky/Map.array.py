@@ -15,10 +15,10 @@ images=None
 ccanvas=None
 def convert_16bit_to_rgb( low_byte):
     # Extrai os bits relevantes do high byte e low byte
-    brish=(low_byte & 0b00001000) << 4
-    red = (low_byte & 0b00000100) << 4 | brish
-    green = (low_byte & 0b00000010) << 5 | brish
-    blue = (low_byte & 0b000000001) << 6 | brish
+    
+    red = (low_byte & 0b00000100) << 5 
+    green = (low_byte & 0b00000010) << 6
+    blue = (low_byte & 0b000000001) << 7 
     
     # Retorna os valores RGB como uma tupla de 3 bytes
     return red, green, blue
